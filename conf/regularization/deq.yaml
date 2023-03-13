@@ -1,0 +1,10 @@
+model:
+  _target_: models.dpir_unet.DPIRNNclass
+  train_sigma_factor: false
+  train_network: false
+  numInChan: 3
+  numOutChan: 3
+pretrained_model: ckpts/deq.pt
+tau: 6.875
+lamb: 0.0657109375
+sigma: 18.216009102783435

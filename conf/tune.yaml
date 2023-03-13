@@ -1,0 +1,41 @@
+hydra:
+  verbose: true
+  run:
+    dir: ./potential_tune/${exp.task._target_}_${exp.regularization._target_}/${now:%Y-%m-%d}_${now:%H-%M-%S-%}
+  sweep:
+    dir: ../potential_tune/${exp.task._target_}_${exp.regularization._target_}
+    subdir: ${now:%Y-%m-%d}_${now:%H-%M-%S}
+defaults:
+  - data_fidality: 
+  - regularization: 
+exp:
+  device: 'cuda:0'
+  output_every_step: true
+  paths:
+    pretrained_checkpoint: ${regularization.pretrained_model}
+    data_path: miscs/CBSD68/0016.png
+    kernel_path: miscs/Levin09.mat
+    predefined_hparams: null
+  task: ${data_fidality}
+  regularization: ${regularization.model}
+  pretrained_checkpoint: ${exp.paths.pretrained_checkpoint}
+  restore:
+    _target_: utils.utils_restore.Restore
+    init_tau: ${regularization.tau}
+    init_lamb: ${regularization.lamb}
+    init_sigma: ${regularization.sigma}
+    backtracking: False
+    max_iter: 100
+    tol: 1e-5
+    enable_diff: false
+    relative_diff_F_min: 1e-6
+    inpainting_init: false
+    n_init: 5
+    backtracking_max_try: null
+    gamma: 0.1
+    eta_tau: 0.5
+    accelerate: false
+    exp_sigma_schedule: false
+  tau_factor: 1.0
+  max_samples: null
+  sample_lst: null

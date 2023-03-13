@@ -1,0 +1,10 @@
+model:
+  _target_: models.dpir_unet.GSPNPNNclass
+  train_sigma_factor: false
+  train_network: false
+  numInChan: 3
+  numOutChan: 3
+pretrained_model: ckpts/elder.pt
+tau: 6.0
+lamb: 0.045
+sigma: 11.276699962046067

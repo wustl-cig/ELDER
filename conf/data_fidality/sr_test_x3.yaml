@@ -1,0 +1,6 @@
+_target_: models.tasks.super_resolution.SuperResolution
+kernel_path: ${exp.paths.kernel_path}
+scale_factors: [3]
+test_scale_factors: [3]
+test_noise_levels: [7.65]
+test_kernels: [5]
